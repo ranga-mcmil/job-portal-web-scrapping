@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div id="page" class="">
+
+    <div class="title01" style="margin: 25px 0;">
+        <div class=" title01-in"
+            style="display: flex; align-items: center;  justify-content: space-between; background-color: #FFF5C7; border-radius: 15px; height: 50px; margin: 12px 0;">
+            <!-- <p class=""><strong><a href="#" class="add">Submit a Site</a></strong></p> -->
+            <h2 class="ico-info">Job Results</h2>
+        </div>
+    </div>
+
+    <div class="row">
+
+        {% for post in posts %}
+            <div class="col-md-12">
+                <p>
+                    <strong><a href="{{ post.link_to_job }}" target="_blank">{{ post.title }}</a></strong><br />
+                    <span class="high">{{ post.link_to_job|truncatechars:30 }}</span>
+                </p>
+                <p>{{ post.description|truncatechars:250 }}</p>
+                <hr class="noscreen" />
+            </div>
+
+        {% empty %}
+            <div class="col-md-12">
+                <p>Sorry, we do not have what you looking for</p>
+                <hr class="noscreen" />
+            </div>
+                    
+        {% endfor %}
+
+        
+
+        
+
+
+
+        <!-- /new-link -->
+
+        <!-- /col50 -->
+
+        <!-- /col50 -->
+    </div>
+    <!-- /box -->
+    {% if posts.has_other_pages %}
+            <ul class="t-center paginator">
+                {% if posts.has_previous %}
+                    <a href="?search={{search_val}}&page={{ posts.previous_page_number }}">&laquo;</a>
+                {% else %}
+                    <a class="disabled"><span>&laquo;</span></a>
+                {% endif %}
+
+                {% for i in posts.paginator.page_range %}
+                    {% if posts.number == i %}
+                        <a style="text-decoration: underline;"><span>{{ i }} <span class="sr-only">(current)</span></span></a>
+                    {% else %}
+                        <a href="?search={{search_val}}&page={{ i }}">{{ i }}</a>
+                        
+                    {% endif %}
+                {% endfor %}
+                {% if posts.has_next %}
+                    <a href="?search={{search_val}}&posts={{ items.next_page_number }}">&raquo;</a>
+                {% else %}
+                    <a class="disabled"><span>&raquo;</span></a>
+                {% endif %}
+            </ul>
+        {% endif %}
+</div>
+
+{% endblock %}
+
+
+<!-- 9576844444444444444444444444444444 -->
+
+<!-- /page -->

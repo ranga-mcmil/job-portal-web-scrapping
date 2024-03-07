@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div id="page" class="">
+    <!-- Catalog -->
+    <div class="">
+        <div class="">
+            <div class="title01" style="margin: 25px 0;">
+                <div class=" title01-in"
+                    style="display: flex; align-items: center;  justify-content: space-between; background-color: #FFF5C7; border-radius: 15px; height: 50px; margin: 12px 0;">
+                    
+                    <h2 class="ico-list">Categories</h2>
+                    <!-- <p class=""><strong><a href="#" class="ico-list">View all</a></strong></p> -->
+                </div>
+            </div>
+
+            <div class="row" style="min-height: 120px">
+
+                {% for category in categories %}
+                    <div class="col-md-3">
+                        <dl class="cat">
+                            <dt style="font-size: 15px; font-weight:500"><a href="{{ category.get_absolute_url }}">{{ category.name }}</a><span
+                                    style="color: #808080; padding: 0 2px; font-weight: 400;">({{ category.posts.count }})</span></dt>
+                        </dl>
+                    </div>
+                
+                {% empty %}
+                    <div class="col-md-12">
+                        <p>No categories available</p>
+                        <hr class="noscreen" />
+                    </div>
+                    
+                {% endfor %}
+
+            </div>
+
+            <hr class="noscreen" />
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
